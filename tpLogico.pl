@@ -8,10 +8,13 @@ pareja(bernardo,charo).
 trabajaPara(marsellus, vincent).
 trabajaPara(marsellus, jules).
 trabajaPara(marsellus, winston).
-trabajaPara(vincent, bernardo).
-trabajaPara(winston, bernardo).
-trabajaPara(bianca, george).
-trabajaPara(charo, george).
+
+trabajaPara(Empleador,bernardo):-
+	trabajaPara(marsellus,Empleador2),
+	trabajaPara(Empleador2,bernardo),
+	Empleador2 /= jules.
+trabajaPara(Empleador,george):-
+	pareja(bernardo,Empleador).
 
 
 saleCon(Quien,Cual):-
