@@ -117,3 +117,10 @@ nivelRespeto(Personaje, Nivel):-
 	Nivel is 20.
 
 nivelRespeto(vincent, 15).
+
+respetibilidad(CantRespetables, CantNoRespetables):-
+	nivelRespeto(Personaje, Nivel),
+	findall(Personaje, Nivel>9, Respetables),
+	findall(Personaje, Nivel<10, NoRespetables),
+	length(Respetables, CantRespetables),
+	length(Respetables, CantNoRespetables).
