@@ -19,6 +19,20 @@ encargo(bernardo, vincent, buscar(jules, fuerteApache)).
 encargo(bernardo, winston, buscar(jules, sanMartin)).
 encargo(bernardo, winston, buscar(jules, lugano)).
 
+%personaje(Nombre, Ocupacion)
+personaje(pumkin,     ladron([estacionesDeServicio, licorerias])).
+personaje(honeyBunny, ladron([licorerias, estacionesDeServicio])).
+personaje(vincent,    mafioso(maton)).
+personaje(jules,      mafioso(maton)).
+personaje(marsellus,  mafioso(capo)).
+personaje(winston,    mafioso(resuelveProblemas)).
+personaje(mia,        actriz([foxForceFive])).
+personaje(butch,      boxeador).
+personaje(bernardo,   mafioso(cerebro)).
+personaje(bianca,     actriz([elPadrino1])).
+personaje(elVendedor, vender([humo, iphone])).
+personaje(jimmie,     vender([auto])).
+
 %tarea(Accion,Detalle)
 tarea(cuidar(mia)).
 tarea(ayudar(jules)).
@@ -66,3 +80,17 @@ estanRelacionados(Empleador,Empleado):-
 estanRelacionados(Empleador1,Empleado):-
 	trabajaPara(Empleador1, Empleador2),
 	trabajaPara(Empleador2, Empleado).
+
+esPeligroso(Personaje):-
+	personaje(Personaje, mafioso(maton)),
+	robaLicorerias(Personaje),
+	jefePeligroso(Personaje).
+	
+robaLicorerias(Personaje):-
+	personaje(Personaje, ladron(licorerias, _)),
+	personaje(Personaje, ladron(_, licorerias)).
+
+jefePeligroso(Personaje):-
+	trabajaPara(Empleador, Personaje),
+	esPeligroso(Empleador).
+
