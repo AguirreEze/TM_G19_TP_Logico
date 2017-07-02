@@ -19,13 +19,11 @@ trabajaPara(Empleador,george):-
 
 
 saleCon(Quien,Cual):-
-	sonPareja(pareja(Quien,Cual)).
-
-sonPareja(pareja(Quien,Cual)):-
+	pareja(Quien,Cual).
+	
+saleCon(Quien,Cual):-
 	pareja(Cual,Quien).
 
-sonPareja(pareja(Quien,Cual)):-
-	pareja(Quien,Cual).
 
 esFiel(Persona):-
 	saleCon(Persona,_),
