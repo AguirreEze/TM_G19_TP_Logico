@@ -12,7 +12,7 @@ trabajaPara(marsellus, winston).
 trabajaPara(_,bernardo):-
 	trabajaPara(marsellus,Empleador2),
 	trabajaPara(Empleador2,bernardo),
-	Empleador2 /= jules.
+	Empleador2 \= jules.
 	
 trabajaPara(Empleador,george):-
 	pareja(bernardo,Empleador).
