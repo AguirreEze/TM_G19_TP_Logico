@@ -9,7 +9,29 @@ trabajaPara(marsellus, vincent).
 trabajaPara(marsellus, jules).
 trabajaPara(marsellus, winston).
 
+%encargo(Solicitante, Encargado, Tarea)
+encargo(marsellus, vincent,   cuidar(mia)).
+encargo(vincent,  elVendedor, cuidar(mia)).
+encargo(marsellus, winston, ayudar(jules)).
+encargo(marsellus, winston, ayudar(vincent)).
+encargo(marsellus, vincent, buscar(butch, losAngeles)).
+encargo(bernardo, vincent, buscar(jules, fuerteApache)).
+encargo(bernardo, winston, buscar(jules, sanMartin)).
+encargo(bernardo, winston, buscar(jules, lugano)).
 
+%tarea(Accion,Detalle)
+tarea(cuidar(mia)).
+tarea(ayudar(jules)).
+tarea(ayudar(vincent)).
+tarea(buscar(butch, losAngeles)).
+tarea(buscar(jules, fuerteApache)).
+tarea(buscar(jules, sanMartin)).
+tarea(buscar(jules, lugano)).
+
+%amigo(persona, otraPersona)
+amigo(vincent, jules).
+amigo(jules, jimmie).
+amigo(vincent, elVendedor).
 
 trabajaPara(Empleado2,bernardo):-
 	trabajaPara(marsellus,Empleador2),
