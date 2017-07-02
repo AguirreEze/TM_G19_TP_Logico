@@ -9,10 +9,11 @@ trabajaPara(marsellus, vincent).
 trabajaPara(marsellus, jules).
 trabajaPara(marsellus, winston).
 
-trabajaPara(Empleador,bernardo):-
+trabajaPara(_,bernardo):-
 	trabajaPara(marsellus,Empleador2),
 	trabajaPara(Empleador2,bernardo),
 	Empleador2 /= jules.
+	
 trabajaPara(Empleador,george):-
 	pareja(bernardo,Empleador).
 
