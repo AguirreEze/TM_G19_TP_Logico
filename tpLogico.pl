@@ -94,3 +94,26 @@ jefePeligroso(Personaje):-
 	trabajaPara(Empleador, Personaje),
 	esPeligroso(Empleador).
 
+sanCayetano(Personaje):-
+	estaCerca(Personaje, Cercano),
+	forall(encargo(Personaje, Cercano, _), estaCerca(Personaje, Cercano)).
+
+estaCerca(Personaje, Cercano):-
+	estanRelacionados(Personaje, Cercano),
+	estanRelacionados(Cercano, Personaje).
+
+nivelRespeto(Personaje, Nivel):-
+	personaje(Personaje, actriz(Pelicula)),
+	findall(Pelicula,actriz(Pelicula), Peliculas),
+	length(Peliculas, CantPeliculas),
+	Nivel is CantPeliculas/10.
+
+nivelRespeto(Personaje, Nivel):-
+	personaje(Personaje, mafioso(resuelveProblemas)),
+	Nivel is 10.
+
+nivelRespeto(Personaje, Nivel):-
+	personaje(Personaje, mafioso(capo)),
+	Nivel is 20.
+
+nivelRespeto(vincent, 15).
