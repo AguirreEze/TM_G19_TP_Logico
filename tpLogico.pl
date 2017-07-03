@@ -82,16 +82,19 @@ estanRelacionados(Empleador1,Empleado):-
 	trabajaPara(Empleador2, Empleado).
 
 esPeligroso(Personaje):-
-	personaje(Personaje, mafioso(maton)),
-	robaLicorerias(Personaje),
-	jefePeligroso(Personaje).
+	personaje(Personaje,Ocupacion),
+	malaOcupacion(Ocupacion).
 	
-robaLicorerias(Personaje):-
-	personaje(Personaje, ladron(licorerias, _)),
-	personaje(Personaje, ladron(_, licorerias)).
+malaOcupacion(mafioso(maton)).
+
+malaOcupacion(ladron(Lugares)):-
+	member(licorerias,Lugares).
+
+esPeligroso(Personaje):-
+	trabajaPara(Empleador,Personaje),
+	jefePeligroso(Empleador).
 
 jefePeligroso(Personaje):-
-	trabajaPara(Empleador, Personaje),
 	esPeligroso(Empleador).
 
 sanCayetano(Personaje):-
