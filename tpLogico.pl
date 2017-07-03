@@ -107,17 +107,14 @@ estaCerca(Personaje, Cercano):-
 
 nivelRespeto(Personaje, Nivel):-
 	personaje(Personaje, actriz(Pelicula)),
-	findall(Pelicula,actriz(Pelicula), Peliculas),
-	length(Peliculas, CantPeliculas),
+	length(Pelicula, CantPeliculas),
 	Nivel is CantPeliculas/10.
 
-nivelRespeto(Personaje, Nivel):-
-	personaje(Personaje, mafioso(resuelveProblemas)),
-	Nivel is 10.
+nivelRespeto(Personaje, 10):-
+	personaje(Personaje, mafioso(resuelveProblemas)).
 
-nivelRespeto(Personaje, Nivel):-
-	personaje(Personaje, mafioso(capo)),
-	Nivel is 20.
+nivelRespeto(Personaje, 20):-
+	personaje(Personaje, mafioso(capo)).
 
 nivelRespeto(vincent, 15).
 
