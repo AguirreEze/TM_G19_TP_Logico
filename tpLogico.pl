@@ -80,19 +80,22 @@ estanRelacionados(Empleador,Empleado):-
 estanRelacionados(Empleador1,Empleado):-
 	trabajaPara(Empleador1, Empleador2),
 	trabajaPara(Empleador2, Empleado).
+	
+esPeligroso(Personaje):-
+	personaje(Personaje,Ocupacion),
+	malaOcupacion(Ocupacion).
 
 esPeligroso(Personaje):-
-	personaje(Personaje, mafioso(maton)),
-	robaLicorerias(Personaje),
-	jefePeligroso(Personaje).
-	
-robaLicorerias(Personaje):-
-	personaje(Personaje, ladron(licorerias, _)),
-	personaje(Personaje, ladron(_, licorerias)).
+	trabajaPara(Empleador,Personaje),
+	jefePeligroso(Empleador).
+
+malaOcupacion(mafioso(maton)).
+
+malaOcupacion(ladron(Lugares)):-
+	member(licorerias,Lugares).
 
 jefePeligroso(Personaje):-
-	trabajaPara(Empleador, Personaje),
-	esPeligroso(Empleador).
+	esPeligroso(Personaje).
 
 sanCayetano(Personaje):-
 	estaCerca(Personaje, Cercano),
@@ -121,16 +124,21 @@ nivelRespeto(vincent, 15).
 respetibilidad(CantRespetables, CantNoRespetables):-
 	nivelRespeto(Personaje, Nivel),
 	findall(Personaje, Nivel>9, Respetables),
-	findall(Personaje, Nivel<10, NoRespetables),
+	findall(Personaje, Nivel<=9, NoRespetables),
 	length(Respetables, CantRespetables),
-	length(Respetables, CantNoRespetables).
+	length(NoRespetables, CantNoRespetables).
 
-masAtereado(Personaje):-
-	findall(CantEncargos, cantidadEncargos(_, CantEncargos), Encargos).
-	max_member(Encargos, MasAtareado),
-	cantidadEncargos(Personaje, MasAtareado).
-	
-	
-cantidadEncargos(Personaje, CantEncargos):-
-	findall(Encargo,encargo(Personaje,_,_) ,Encargos),
-	length(Encargos, CantEncargos).
+masAtareado(Personaje):-
+	personaje(Personaje,_),
+	forall(personaje(OtroPersonaje,_),tieneMasEncargos(Personaje,OtroPersonaje)).
+
+tieneMasEncargos(Personaje,OtroPersonaje):-
+  	cantidadDeEncargos(Personaje,EncargosPersonaje),
+  	cantidadDeEncargos(OtroPersonaje,EncargosOtroPersonaje),
+  	EncargosPersonaje > EncargosOtroPersonaje.
+
+ cantidadDeEncargos(Personaje,Encargos):-
+ 	encargo(_,Personaje,_),
+ 	findall(Encargo,encargo(_,Personaje,Encargo),ListaEncargos),
+ 	length(ListaEncargos,Encargos).
+
