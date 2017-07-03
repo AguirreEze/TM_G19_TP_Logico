@@ -127,3 +127,17 @@ respetibilidad(CantRespetables, CantNoRespetables):-
 	findall(Personaje, Nivel<=8, NoRespetables),
 	length(Respetables, CantRespetables),
 	length(NoRespetables, CantNoRespetables).
+
+masAtareado(Personaje):-
+	personaje(Personaje,_),
+	forall(personaje(OtroPersonaje,_),tieneMasEncargos(Personaje,OtroPersonaje)).
+
+tieneMasEncargos(Personaje,OtroPersonaje):-
+  	cantidadDeEncargos(Personaje,EncargosPersonaje),
+  	cantidadDeEncargos(OtroPersonaje,EncargosOtroPersonaje),
+  	EncargosPersonaje > EncargosOtroPersonaje.
+
+ cantidadDeEncargos(Personaje,Encargos):-
+ 	encargo(_,Personaje,_),
+ 	findall(Encargo,encargo(_,Personaje,Encargo),ListaEncargos),
+ 	length(ListaEncargos,Encargos).
