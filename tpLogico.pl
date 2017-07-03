@@ -105,19 +105,19 @@ estaCerca(Personaje, Cercano):-
 	estanRelacionados(Personaje, Cercano),
 	estanRelacionados(Cercano, Personaje).
 
-nivelRespeto(Personaje, Nivel):-
-	personaje(Personaje, actriz(Pelicula)),
-	findall(Pelicula,actriz(Pelicula), Peliculas),
+nivelRespeto(Personaje,Nivel):-
+	personaje(Personaje,Ocupacion),
+	respetoPorOcupacion(Ocupacion,Nivel).
+
+respetoPorOcupacion(actriz(Peliculas),Nivel):-
 	length(Peliculas, CantPeliculas),
 	Nivel is CantPeliculas/10.
 
-nivelRespeto(Personaje, Nivel):-
-	personaje(Personaje, mafioso(resuelveProblemas)),
-	Nivel is 10.
+respetoPorOcupacion(mafioso(Tipo),Nivel):-
+	tipoDeMafioso(Tipo,Nivel).
 
-nivelRespeto(Personaje, Nivel):-
-	personaje(Personaje, mafioso(capo)),
-	Nivel is 20.
+tipoDeMafioso(capo,20).
+tipoDeMafioso(resuelveProblemas,10).
 
 nivelRespeto(vincent, 15).
 
